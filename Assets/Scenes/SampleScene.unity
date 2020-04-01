@@ -247,6 +247,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37272946c8eab4c8293c422838c94592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Jaw: {fileID: 310003293}
+  JawStartPoint: {fileID: 477130491}
+  JawEndPoint: {fileID: 1774367828}
+  jawSpeed: 8
+  jawAccelerationTime: 0.2
 --- !u!1 &477130490
 GameObject:
   m_ObjectHideFlags: 0
