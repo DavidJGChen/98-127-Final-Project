@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class JawController : MonoBehaviour
 {
@@ -17,9 +18,13 @@ public class JawController : MonoBehaviour
     private float jawCurrentY;
     private bool jawOpen;
 
+    public event Action ChewEvent;
+
     private void Start() {
         jawStartY = JawStartPoint.localPosition.y;
         jawEndY = JawEndPoint.localPosition.y;
+
+        ChewEvent += OnJawClose;
     }
 
     private void Update() {
@@ -41,7 +46,7 @@ public class JawController : MonoBehaviour
 
         if (jawStartY - newPos.y < 0.05f) {
             if (jawOpen) {
-                OnJawClose();
+                ChewEvent();
                 jawOpen = false;
             }
         }
