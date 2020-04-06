@@ -6,8 +6,10 @@ public class JawController : MonoBehaviour
     public Transform Jaw;
     public Transform JawStartPoint;
     public Transform JawEndPoint;
+    public Transform JawHotdogThresholdPoint;
+    public Transform JawBitingLine;
     [SerializeField]
-    private float jawSpeed;
+    private float jawSpeed = 0;
     [SerializeField]
     private float jawAccelerationTime;
     private float mouseVelocityY;
@@ -15,6 +17,7 @@ public class JawController : MonoBehaviour
     private float refJawVelocityY;
     private float jawStartY;
     private float jawEndY;
+    private float jawHotdogThresholdY;
     private float jawCurrentY;
     private bool jawOpen;
 
@@ -23,6 +26,7 @@ public class JawController : MonoBehaviour
     private void Start() {
         jawStartY = JawStartPoint.localPosition.y;
         jawEndY = JawEndPoint.localPosition.y;
+        jawHotdogThresholdY = JawHotdogThresholdPoint.localPosition.y;
 
         ChewEvent += OnJawClose;
     }
@@ -55,9 +59,20 @@ public class JawController : MonoBehaviour
         }
 
         Jaw.localPosition = newPos;
+        jawCurrentY = newPos.y;
     }
 
     private void OnJawClose() {
         print("nom");
+    }
+
+    public bool CanAcceptFood {
+        get {
+            return jawCurrentY - jawHotdogThresholdY < 0;
+        }
+    }
+
+    public float GetBitingLineX() {
+        return JawBitingLine.transform.position.x;
     }
 }
