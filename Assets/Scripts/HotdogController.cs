@@ -11,7 +11,7 @@ public class HotdogController : MonoBehaviour
     private float moveSpeed = 8;
     private bool move = false;
     private bool collidingJaw = false;
-    private float percentageEaten = .0f;
+    private float percentageEaten = 0f;
     private float hotdogWidth;
     private float jawBitingLine;
 
@@ -54,11 +54,14 @@ public class HotdogController : MonoBehaviour
             float amountBitten = jawBitingLine - currentX;
 
             if (amountBitten > 0) {
+                float oldPercentageEaten = percentageEaten;
                 percentageEaten = amountBitten / hotdogWidth;
                 if (percentageEaten > 1f) {
+                    percentageEaten = 1f;
                     DestroyHotdog();
                 }
                 print(percentageEaten);
+                jawController.InsertFood(percentageEaten - oldPercentageEaten);
                 UpdateSpriteMask();
             }
         }
