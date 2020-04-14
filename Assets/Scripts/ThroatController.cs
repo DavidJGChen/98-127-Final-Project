@@ -6,6 +6,8 @@ using System;
 public class ThroatController : MonoBehaviour
 {
     private JawController jawController;
+    private Transform chewedStage1;
+    private Transform chewedStage2;
     public event Action SwallowEvent;
     // Start is called before the first frame update
     private void Start()

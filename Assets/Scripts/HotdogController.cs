@@ -37,7 +37,7 @@ public class HotdogController : MonoBehaviour
     private void FixedUpdate() {
         if (move) {
             if (!collidingJaw || jawController.CanAcceptFood) {
-                this.transform.Translate(Vector2.left * Time.deltaTime * moveSpeed);
+                this.transform.Translate(Vector2.right * Time.deltaTime * moveSpeed);
             }
         }
     }
@@ -49,9 +49,9 @@ public class HotdogController : MonoBehaviour
 
     private void GetBitten() {
         if (collidingJaw) {
-            float currentX = collider2D.bounds.min.x;
+            float currentX = collider2D.bounds.max.x;
 
-            float amountBitten = jawBitingLine - currentX;
+            float amountBitten = currentX - jawBitingLine;
 
             if (amountBitten > 0) {
                 float oldPercentageEaten = percentageEaten;
@@ -62,6 +62,7 @@ public class HotdogController : MonoBehaviour
                 }
                 print(percentageEaten);
                 jawController.InsertFood(percentageEaten - oldPercentageEaten);
+                jawController.EmitParticles();
                 UpdateSpriteMask();
             }
         }
@@ -70,7 +71,7 @@ public class HotdogController : MonoBehaviour
     private void UpdateSpriteMask() {
         Vector2 newPos = Vector2.zero;
 
-        newPos.x = percentageEaten * hotdogWidth;
+        newPos.x = hotdogWidth / 2 - percentageEaten * hotdogWidth;
 
         biteMask.localPosition = newPos;
     }

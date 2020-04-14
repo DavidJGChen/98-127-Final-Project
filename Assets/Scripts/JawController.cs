@@ -4,6 +4,8 @@ using UnityEngine;
 public class JawController : MonoBehaviour
 {
     private ThroatController throatController;
+    [SerializeField]
+    private ParticleSystem foodParticleSystem;
     public Transform Jaw;
     public Transform JawStartPoint;
     public Transform JawEndPoint;
@@ -91,5 +93,9 @@ public class JawController : MonoBehaviour
 
     public void InsertFood(float percentage) {
         currHotdogs += percentage;
+    }
+
+    public void EmitParticles() {
+        foodParticleSystem.Emit(5);
     }
 }
