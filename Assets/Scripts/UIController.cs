@@ -3,16 +3,26 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    public JawController jawController;
-    public TMP_Text count;
+    private JawController jawController;
+    private ThroatController throatController;
+    public TMP_Text currHotdogText;
 
-    int chewCount = 0;
+    float currHotdogs = 0f;
     void Start()
     {
-        jawController.ChewEvent += OnChew;
+        jawController = FindObjectOfType<JawController>();
+        throatController = FindObjectOfType<ThroatController>();
+
+        jawController.ChewEvent += OnChewOrSwallow;
+        throatController.SwallowEvent += OnChewOrSwallow;
     }
 
-    private void OnChew() {
-        count.text = chewCount++.ToString();
+    private void OnChewOrSwallow() {
+        Invoke("UpdateHotdogCount", 0.05f);
+    }
+
+    private void UpdateHotdogCount() {
+        currHotdogs = throatController.CurrentHotDogs;
+        currHotdogText.text = currHotdogs.ToString();
     }
 }

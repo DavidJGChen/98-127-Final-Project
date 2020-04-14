@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class JawController : MonoBehaviour
 {
+    private ThroatController throatController;
+    [SerializeField]
+    private ParticleSystem foodParticleSystem;
     public Transform Jaw;
     public Transform JawStartPoint;
     public Transform JawEndPoint;
@@ -24,6 +27,8 @@ public class JawController : MonoBehaviour
     public event Action ChewEvent;
 
     private void Start() {
+        throatController = FindObjectOfType<ThroatController>();
+
         jawStartY = JawStartPoint.localPosition.y;
         jawEndY = JawEndPoint.localPosition.y;
         jawHotdogThresholdY = JawHotdogThresholdPoint.localPosition.y;
@@ -74,5 +79,13 @@ public class JawController : MonoBehaviour
 
     public float GetBitingLineX() {
         return JawBitingLine.transform.position.x;
+    }
+
+    public void InsertFood(float percentage) {
+        throatController.InsertFood(percentage);
+    }
+
+    public void EmitParticles() {
+        foodParticleSystem.Emit(5);
     }
 }
