@@ -61,9 +61,11 @@ public class HotdogController : MonoBehaviour
                     DestroyHotdog();
                 }
                 print(percentageEaten);
-                jawController.InsertFood(percentageEaten - oldPercentageEaten);
-                jawController.EmitParticles();
-                UpdateSpriteMask();
+                if (percentageEaten - oldPercentageEaten > 0) {
+                    jawController.InsertFood(percentageEaten - oldPercentageEaten);
+                    jawController.EmitParticles();
+                    UpdateSpriteMask();
+                }
             }
         }
     }
