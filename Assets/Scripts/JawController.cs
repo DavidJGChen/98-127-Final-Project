@@ -23,13 +23,11 @@ public class JawController : MonoBehaviour
     private float jawHotdogThresholdY;
     private float jawCurrentY;
     private bool jawOpen;
-    private float currHotdogs = 0;
 
     public event Action ChewEvent;
 
     private void Start() {
         throatController = FindObjectOfType<ThroatController>();
-        throatController.SwallowEvent += Swallow;
 
         jawStartY = JawStartPoint.localPosition.y;
         jawEndY = JawEndPoint.localPosition.y;
@@ -79,20 +77,12 @@ public class JawController : MonoBehaviour
         }
     }
 
-    public void Swallow() {
-        currHotdogs = 0f;
-    }
-
-    public float CurrentHotDogs {
-        get => currHotdogs;
-    }
-
     public float GetBitingLineX() {
         return JawBitingLine.transform.position.x;
     }
 
     public void InsertFood(float percentage) {
-        currHotdogs += percentage;
+        throatController.InsertFood(percentage);
     }
 
     public void EmitParticles() {
