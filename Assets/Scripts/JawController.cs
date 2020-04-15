@@ -3,89 +3,97 @@ using UnityEngine;
 
 public class JawController : MonoBehaviour
 {
-    private ThroatController throatController;
+    private ThroatController _throatController;
+    private ParticleSystem _foodParticleSystem;
     [SerializeField]
-    private ParticleSystem foodParticleSystem;
-    public Transform Jaw;
-    public Transform JawStartPoint;
-    public Transform JawEndPoint;
-    public Transform JawHotdogThresholdPoint;
-    public Transform JawBitingLine;
-    [SerializeField]
-    private float jawSpeed = 0;
-    [SerializeField]
-    private float jawAccelerationTime;
-    private float mouseVelocityY;
-    private float currentJawVelocityY;
-    private float refJawVelocityY;
-    private float jawStartY;
-    private float jawEndY;
-    private float jawHotdogThresholdY;
-    private float jawCurrentY;
-    private bool jawOpen;
+    private Transform _jaw;
 
-    public event Action ChewEvent;
+    [SerializeField]
+    private Transform _jawUpperLimit;
+    private float _jawUpperLimitY;
+
+    [SerializeField]
+    private Transform _jawLowerLimit;
+    private float _jawLowerLimitY;
+
+    [SerializeField]
+    private Transform _jawOpenPoint;
+    private float _jawOpenPointY;
+
+    [SerializeField]
+    private Transform _jawBiteLine;
+    private float _jawBiteLineX;
+    
+    // Settings
+    [SerializeField]
+    private float _jawSpeed = 8f;
+    [SerializeField]
+    private float _jawBitingThreshold = 0.1f;
+    [SerializeField]
+    private int _particles = 8;
+
+    // Other stuff
+    private float _mouseVelocityY;
+    private float _jawCurrentY;
+    private bool _jawClosed;
+    private bool _canAcceptFood;
+    public bool CanAcceptFood {
+        get => _canAcceptFood;
+    }
+
+    public event Action OnChew;
 
     private void Start() {
-        throatController = FindObjectOfType<ThroatController>();
+        _throatController = FindObjectOfType<ThroatController>();
+        _foodParticleSystem = GetComponentInChildren<ParticleSystem>();
 
-        jawStartY = JawStartPoint.localPosition.y;
-        jawEndY = JawEndPoint.localPosition.y;
-        jawHotdogThresholdY = JawHotdogThresholdPoint.localPosition.y;
+        _jawUpperLimitY = _jawUpperLimit.localPosition.y;
+        _jawLowerLimitY = _jawLowerLimit.localPosition.y;
+        _jawOpenPointY = _jawOpenPoint.localPosition.y;
+        _jawBiteLineX = _jawBiteLine.position.x;
 
-        ChewEvent += OnJawClose;
+        OnChew += PrintNom;
     }
-
     private void Update() {
-        mouseVelocityY = Input.GetAxis("Mouse Y");
+        _mouseVelocityY = Input.GetAxis("Mouse Y");
     }
-
     private void FixedUpdate() {
-        Vector2 newPos = Jaw.localPosition;
+        if (_mouseVelocityY == 0f) {
+            return;
+        }
 
-        // currentJawVelocityY = 
-        //     Mathf.SmoothDamp(currentJawVelocityY,
-        //         mouseVelocityY * jawSpeed, 
-        //         ref refJawVelocityY, 
-        //         jawAccelerationTime);
+        Vector2 newPos = _jaw.localPosition;
 
-        // newPos.y += currentJawVelocityY * Time.deltaTime;
-        newPos.y += mouseVelocityY * jawSpeed * Time.deltaTime;
-        newPos.y = Mathf.Clamp(newPos.y, jawEndY, jawStartY);
+        newPos.y += _mouseVelocityY * _jawSpeed * Time.deltaTime;
+        newPos.y = Mathf.Clamp(newPos.y, _jawLowerLimitY, _jawUpperLimitY);
 
-        if (jawStartY - newPos.y < 0.05f) {
-            if (jawOpen) {
-                ChewEvent();
-                jawOpen = false;
+        if (_jawUpperLimitY - newPos.y < _jawBitingThreshold) {
+            if (!_jawClosed) {
+                _jawClosed = true;
+                OnChew();
             }
         }
         else {
-            jawOpen = true;
+            _jawClosed = false;
         }
 
-        Jaw.localPosition = newPos;
-        jawCurrentY = newPos.y;
+        _jaw.localPosition = newPos;
+        _jawCurrentY = newPos.y;
+
+        _canAcceptFood = _jawCurrentY - _jawOpenPointY < 0;
     }
 
-    private void OnJawClose() {
+    private void PrintNom() {
         print("nom");
     }
 
-    public bool CanAcceptFood {
-        get {
-            return jawCurrentY - jawHotdogThresholdY < 0;
-        }
+    public float GetBiteLineX() {
+        return _jawBiteLineX;
     }
-
-    public float GetBitingLineX() {
-        return JawBitingLine.transform.position.x;
-    }
-
     public void InsertFood(float percentage) {
-        throatController.InsertFood(percentage);
+        _throatController.InsertFood(percentage);
     }
-
     public void EmitParticles() {
-        foodParticleSystem.Emit(5);
+        _foodParticleSystem.Emit(_particles);
     }
 }

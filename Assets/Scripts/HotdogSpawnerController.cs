@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class HotdogSpawnerController : MonoBehaviour
 {
-    public GameObject hotdogPrefab;
-    private new ParticleSystem particleSystem;
+    [SerializeField]
+    private GameObject _hotdogPrefab;
+    private ParticleSystem _particleSystem;
+
+    [SerializeField]
+    private int _particles = 20;
 
     private void Start() {
-        particleSystem = GetComponentInChildren<ParticleSystem>();
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
     }
-
     private void Update() {
         if (Input.GetKeyDown(KeyCode.E)) {
-            Instantiate(hotdogPrefab, transform.position, Quaternion.identity);
-            particleSystem.Emit(20);
+            Instantiate(_hotdogPrefab, transform.position, Quaternion.identity);
+            _particleSystem.Emit(_particles);
         }
     }
 }

@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 62263893}
   m_Layer: 0
-  m_Name: ThroatWaypoint1
+  m_Name: Waypoint 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,12 +144,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62263892}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.319, y: 0.516, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.31900024, y: 0.51600003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 100248793}
-  m_RootOrder: 2
+  m_Father: {fileID: 312408068}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100248792
 GameObject:
@@ -160,9 +160,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 100248793}
+  - component: {fileID: 100248794}
   m_Layer: 0
   m_Name: Throat
-  m_TagString: Untagged
+  m_TagString: Throat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,14 +179,37 @@ Transform:
   m_LocalPosition: {x: 2, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 533833342}
   - {fileID: 478313157}
-  - {fileID: 62263893}
-  - {fileID: 201203315}
-  - {fileID: 1036519863}
+  - {fileID: 312408068}
   m_Father: {fileID: 1873762083}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &100248794
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100248792}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.36, y: 0.57}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &160377426
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +274,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &173070973
 GameObject:
@@ -262,7 +286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 173070974}
   m_Layer: 0
-  m_Name: JawWaypoints
+  m_Name: Jaw Movement Constraints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,15 +300,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173070973}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.93, y: -0.82, z: 0}
+  m_LocalPosition: {x: 0, y: 0.845, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 477130491}
   - {fileID: 1774367828}
   - {fileID: 504343219}
   - {fileID: 174598515}
-  m_Father: {fileID: 552646828}
-  m_RootOrder: 6
+  m_Father: {fileID: 488667302}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &174598514
 GameObject:
@@ -296,7 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 174598515}
   m_Layer: 0
-  m_Name: JawBitingLine
+  m_Name: Bite Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,7 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 201203315}
   m_Layer: 0
-  m_Name: ThroatWaypoint2
+  m_Name: Waypoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,12 +363,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201203314}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.662, y: -0.287, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.6619997, y: -0.28699994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 100248793}
-  m_RootOrder: 3
+  m_Father: {fileID: 312408068}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &218897859
 GameObject:
@@ -356,7 +380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 218897860}
   m_Layer: 0
-  m_Name: ChewedStage1
+  m_Name: Food Stage 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,14 +394,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218897859}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.063, y: 0.903, z: 0}
+  m_LocalPosition: {x: 0.06300002, y: 0.9029999, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children:
   - {fileID: 1120736322}
-  m_Father: {fileID: 552646828}
+  m_Father: {fileID: 1546135845}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &288468946
+--- !u!1 &312408067
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -385,55 +409,31 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 288468947}
-  - component: {fileID: 288468948}
+  - component: {fileID: 312408068}
   m_Layer: 0
-  m_Name: BackOfThroatCollider
-  m_TagString: Throat
+  m_Name: Throat Waypoints
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &288468947
+--- !u!4 &312408068
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288468946}
+  m_GameObject: {fileID: 312408067}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3, y: 2.46, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1873762083}
-  m_RootOrder: 2
+  m_Children:
+  - {fileID: 62263893}
+  - {fileID: 201203315}
+  - {fileID: 1036519863}
+  m_Father: {fileID: 100248793}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &288468948
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288468946}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &335503664
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,14 +458,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335503664}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.35874, y: -3.5349088, z: 0}
+  m_LocalPosition: {x: -6.35874, y: -3.5349085, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2131294769}
   - {fileID: 1261768449}
   - {fileID: 1050427640}
-  m_Father: {fileID: 1873762083}
-  m_RootOrder: 5
+  m_Father: {fileID: 488667302}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &376485741
 GameObject:
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 376485742}
   - component: {fileID: 376485743}
   m_Layer: 0
-  m_Name: Guy1Brow@2x
+  m_Name: Brow Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -495,8 +495,8 @@ Transform:
   m_LocalPosition: {x: 0.044259787, y: 5.8530912, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 1873762083}
-  m_RootOrder: 10
+  m_Father: {fileID: 488667302}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &376485743
 SpriteRenderer:
@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: 430274162}
   - component: {fileID: 430274163}
   m_Layer: 0
-  m_Name: Guy1Head@2x
+  m_Name: Head Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -576,8 +576,8 @@ Transform:
   m_LocalPosition: {x: 2.3512597, y: 3.5150912, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 1873762083}
-  m_RootOrder: 11
+  m_Father: {fileID: 488667302}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &430274163
 SpriteRenderer:
@@ -629,6 +629,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &459269824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459269825}
+  - component: {fileID: 459269826}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &459269825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459269824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1239508902}
+  - {fileID: 1388191433}
+  - {fileID: 1221274729}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &459269826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459269824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4574dbd2e52d74caf997d65efebef2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currHotdogText: {fileID: 1118446327}
 --- !u!1 &477130490
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,7 +686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 477130491}
   m_Layer: 0
-  m_Name: JawStartPoint
+  m_Name: Upper Limit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -670,7 +717,7 @@ GameObject:
   - component: {fileID: 478313157}
   - component: {fileID: 478313158}
   m_Layer: 0
-  m_Name: Guy1Throat_1
+  m_Name: Throat Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -688,7 +735,7 @@ Transform:
   m_LocalScale: {x: 0.92802596, y: 1.087, z: 1}
   m_Children: []
   m_Father: {fileID: 100248793}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &478313158
 SpriteRenderer:
@@ -740,6 +787,44 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &488667301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 488667302}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &488667302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488667301}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 430274162}
+  - {fileID: 376485742}
+  - {fileID: 921756465}
+  - {fileID: 335503665}
+  - {fileID: 1740744562}
+  - {fileID: 1089154995}
+  - {fileID: 552646828}
+  - {fileID: 173070974}
+  m_Father: {fileID: 1873762083}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &504343218
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,7 +835,7 @@ GameObject:
   m_Component:
   - component: {fileID: 504343219}
   m_Layer: 0
-  m_Name: JawHotdogThresholdPoint
+  m_Name: Jaw Open Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -864,7 +949,7 @@ GameObject:
   - component: {fileID: 533833342}
   - component: {fileID: 533833343}
   m_Layer: 0
-  m_Name: Guy1Mouth
+  m_Name: Mouth Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -878,11 +963,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533833341}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.374, y: 0.3048, z: 0}
+  m_LocalPosition: {x: 1.6259999, y: 2.3048, z: 0}
   m_LocalScale: {x: 1.0619463, y: 1.5636832, z: 1}
   m_Children: []
-  m_Father: {fileID: 100248793}
-  m_RootOrder: 0
+  m_Father: {fileID: 1089154995}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &533833343
 SpriteRenderer:
@@ -945,7 +1030,7 @@ GameObject:
   - component: {fileID: 552646828}
   - component: {fileID: 552646829}
   m_Layer: 0
-  m_Name: Jaw
+  m_Name: Lower Jaw
   m_TagString: Jaw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -958,19 +1043,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552646827}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.93, y: 1.665, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.93000007, y: 1.665, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 218897860}
-  - {fileID: 1451523447}
-  - {fileID: 1389353742}
-  - {fileID: 1630684990}
+  - {fileID: 1546135845}
   - {fileID: 625418204}
+  - {fileID: 1706783928}
   - {fileID: 1208787578}
-  - {fileID: 173070974}
-  m_Father: {fileID: 1873762083}
-  m_RootOrder: 1
+  - {fileID: 795794436}
+  m_Father: {fileID: 488667302}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &552646829
 BoxCollider2D:
@@ -1009,7 +1092,7 @@ GameObject:
   - component: {fileID: 625418204}
   - component: {fileID: 625418205}
   m_Layer: 0
-  m_Name: Guy1Chin@2x
+  m_Name: Chin Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,7 +1110,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 552646828}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &625418205
 SpriteRenderer:
@@ -1090,7 +1173,7 @@ GameObject:
   - component: {fileID: 673085543}
   - component: {fileID: 673085544}
   m_Layer: 0
-  m_Name: Guy1Body@2x
+  m_Name: Body Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1209,7 +1292,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &795794435
 GameObject:
@@ -1223,7 +1306,7 @@ GameObject:
   - component: {fileID: 795794438}
   - component: {fileID: 795794437}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Food VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1236,12 +1319,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 795794435}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 2.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.43, y: 0.83500004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1873762083}
-  m_RootOrder: 0
+  m_Father: {fileID: 552646828}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &795794437
 ParticleSystemRenderer:
@@ -1380,7 +1463,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -5976,7 +6059,7 @@ GameObject:
   - component: {fileID: 921756465}
   - component: {fileID: 921756466}
   m_Layer: 0
-  m_Name: Guy1Eyebrow@2x
+  m_Name: Eyebrow Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5993,8 +6076,8 @@ Transform:
   m_LocalPosition: {x: 0.9812598, y: 5.025091, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 1873762083}
-  m_RootOrder: 8
+  m_Father: {fileID: 488667302}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &921756466
 SpriteRenderer:
@@ -6056,7 +6139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036519863}
   m_Layer: 0
-  m_Name: ThroatWaypoint3
+  m_Name: Waypoint 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6069,12 +6152,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036519862}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.887, y: -1.118, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.8870001, y: -1.118, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 100248793}
-  m_RootOrder: 4
+  m_Father: {fileID: 312408068}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1050427639
 GameObject:
@@ -6087,7 +6170,7 @@ GameObject:
   - component: {fileID: 1050427640}
   - component: {fileID: 1050427641}
   m_Layer: 0
-  m_Name: Guy1EyeWhite@2x
+  m_Name: Eye White Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6157,6 +6240,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1089154994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1089154995}
+  m_Layer: 0
+  m_Name: Upper Jaw
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1089154995
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089154994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1952727551}
+  - {fileID: 533833342}
+  m_Father: {fileID: 488667302}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1118446325
 GameObject:
   m_ObjectHideFlags: 0
@@ -6169,7 +6284,7 @@ GameObject:
   - component: {fileID: 1118446328}
   - component: {fileID: 1118446327}
   m_Layer: 5
-  m_Name: ChewCounter
+  m_Name: Chew Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6323,7 +6438,7 @@ GameObject:
   - component: {fileID: 1120736322}
   - component: {fileID: 1120736323}
   m_Layer: 0
-  m_Name: ChewedSprite
+  m_Name: Chewed Food Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6422,7 +6537,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1873762083}
-  m_RootOrder: 12
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1197554090
 SpriteRenderer:
@@ -6485,7 +6600,7 @@ GameObject:
   - component: {fileID: 1208787578}
   - component: {fileID: 1208787579}
   m_Layer: 0
-  m_Name: Guy1LowerTeeth@2x
+  m_Name: Lower Teeth Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6503,7 +6618,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 552646828}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1208787579
 SpriteRenderer:
@@ -6566,7 +6681,7 @@ GameObject:
   - component: {fileID: 1221274729}
   - component: {fileID: 1221274728}
   m_Layer: 0
-  m_Name: UIMouse@2x
+  m_Name: UIMouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6629,12 +6744,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221274727}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.15, y: 0.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 459269825}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1239508897
 GameObject:
@@ -6648,7 +6763,6 @@ GameObject:
   - component: {fileID: 1239508901}
   - component: {fileID: 1239508900}
   - component: {fileID: 1239508899}
-  - component: {fileID: 1239508898}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6656,19 +6770,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1239508898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239508897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4574dbd2e52d74caf997d65efebef2b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currHotdogText: {fileID: 1118446327}
 --- !u!114 &1239508899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6741,8 +6842,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1118446326}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 459269825}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6760,7 +6861,7 @@ GameObject:
   - component: {fileID: 1261768449}
   - component: {fileID: 1261768450}
   m_Layer: 0
-  m_Name: Guy1EyeDark@2x
+  m_Name: Pupil Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6841,7 +6942,7 @@ GameObject:
   - component: {fileID: 1298550880}
   - component: {fileID: 1298550879}
   m_Layer: 0
-  m_Name: Background@2x
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6922,7 +7023,7 @@ GameObject:
   - component: {fileID: 1388191433}
   - component: {fileID: 1388191432}
   m_Layer: 0
-  m_Name: UIArrow@2x
+  m_Name: UIArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6985,12 +7086,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388191431}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.2, y: 0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 459269825}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1389353741
 GameObject:
@@ -7002,7 +7103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1389353742}
   m_Layer: 0
-  m_Name: ChewedStage3
+  m_Name: Food Stage 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7016,11 +7117,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389353741}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.58, y: 0.849, z: 0}
+  m_LocalPosition: {x: 0.5800002, y: 0.849, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children:
   - {fileID: 1556121754}
-  m_Father: {fileID: 552646828}
+  m_Father: {fileID: 1546135845}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1451523446
@@ -7033,7 +7134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451523447}
   m_Layer: 0
-  m_Name: ChewedStage2
+  m_Name: Food Stage 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7047,11 +7148,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451523446}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.313, y: 0.897, z: 0}
+  m_LocalPosition: {x: 0.31300002, y: 0.8970001, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children:
   - {fileID: 1892520056}
-  m_Father: {fileID: 552646828}
+  m_Father: {fileID: 1546135845}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1502524465
@@ -7083,7 +7184,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1873762083}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1502524467
 SpriteRenderer:
@@ -7135,6 +7236,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1546135844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546135845}
+  m_Layer: 0
+  m_Name: Food Stages
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1546135845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546135844}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 218897860}
+  - {fileID: 1451523447}
+  - {fileID: 1389353742}
+  - {fileID: 1630684990}
+  m_Father: {fileID: 552646828}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1556121753
 GameObject:
   m_ObjectHideFlags: 0
@@ -7146,7 +7281,7 @@ GameObject:
   - component: {fileID: 1556121754}
   - component: {fileID: 1556121755}
   m_Layer: 0
-  m_Name: ChewedSprite
+  m_Name: Chewed Food Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7226,7 +7361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1630684990}
   m_Layer: 0
-  m_Name: ChewedStage4
+  m_Name: Food Stage 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7240,11 +7375,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1630684989}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.766, y: 0.819, z: 0}
+  m_LocalPosition: {x: 0.7660001, y: 0.819, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children:
   - {fileID: 1792213693}
-  m_Father: {fileID: 552646828}
+  m_Father: {fileID: 1546135845}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1698528047
@@ -7277,7 +7412,7 @@ Transform:
   - {fileID: 1892823826}
   - {fileID: 673085543}
   m_Father: {fileID: 1873762083}
-  m_RootOrder: 9
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1706783927
 GameObject:
@@ -7290,12 +7425,12 @@ GameObject:
   - component: {fileID: 1706783928}
   - component: {fileID: 1706783929}
   m_Layer: 0
-  m_Name: Guy1Tongue@2x
+  m_Name: Tongue Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1706783928
 Transform:
   m_ObjectHideFlags: 0
@@ -7304,11 +7439,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706783927}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3699999, y: 2.25, z: 0}
+  m_LocalPosition: {x: 0.456, y: 0.916, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 1873762083}
-  m_RootOrder: 13
+  m_Father: {fileID: 552646828}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1706783929
 SpriteRenderer:
@@ -7348,7 +7483,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f9772a3e52ba1944dad50d0cec40a292, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7371,7 +7506,7 @@ GameObject:
   - component: {fileID: 1740744562}
   - component: {fileID: 1740744563}
   m_Layer: 0
-  m_Name: Guy1Ear@2x
+  m_Name: Ear Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7388,8 +7523,8 @@ Transform:
   m_LocalPosition: {x: 3.2312598, y: 4.105091, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 1873762083}
-  m_RootOrder: 6
+  m_Father: {fileID: 488667302}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1740744563
 SpriteRenderer:
@@ -7451,7 +7586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1774367828}
   m_Layer: 0
-  m_Name: JawEndPoint
+  m_Name: Lower Limit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7482,7 +7617,7 @@ GameObject:
   - component: {fileID: 1792213693}
   - component: {fileID: 1792213694}
   m_Layer: 0
-  m_Name: ChewedSprite
+  m_Name: Chewed Food Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7564,7 +7699,7 @@ GameObject:
   - component: {fileID: 1794916920}
   - component: {fileID: 1794916919}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Spawner VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12319,7 +12454,7 @@ GameObject:
   - component: {fileID: 1819586321}
   - component: {fileID: 1819586324}
   m_Layer: 0
-  m_Name: HotdogSpawner
+  m_Name: Hotdog Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12385,7 +12520,7 @@ Transform:
   m_Children:
   - {fileID: 1794916918}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1819586324
 MonoBehaviour:
@@ -12430,22 +12565,13 @@ Transform:
   m_LocalPosition: {x: 2.54, y: -2.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 795794436}
-  - {fileID: 552646828}
-  - {fileID: 288468947}
+  - {fileID: 488667302}
   - {fileID: 100248793}
-  - {fileID: 1952727551}
-  - {fileID: 335503665}
-  - {fileID: 1740744562}
-  - {fileID: 1502524466}
-  - {fileID: 921756465}
   - {fileID: 1698528048}
-  - {fileID: 376485742}
-  - {fileID: 430274162}
+  - {fileID: 1502524466}
   - {fileID: 1197554089}
-  - {fileID: 1706783928}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1873762084
 MonoBehaviour:
@@ -12499,7 +12625,7 @@ GameObject:
   - component: {fileID: 1892520056}
   - component: {fileID: 1892520057}
   m_Layer: 0
-  m_Name: ChewedSprite
+  m_Name: Chewed Food Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12580,7 +12706,7 @@ GameObject:
   - component: {fileID: 1892823826}
   - component: {fileID: 1892823827}
   m_Layer: 0
-  m_Name: Guy1Arm@2x
+  m_Name: Arm Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12661,7 +12787,7 @@ GameObject:
   - component: {fileID: 1952727551}
   - component: {fileID: 1952727552}
   m_Layer: 0
-  m_Name: Guy1UpperTeeth@2x
+  m_Name: Upper Teeth Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12678,8 +12804,8 @@ Transform:
   m_LocalPosition: {x: 0.8712599, y: 2.9150913, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 1873762083}
-  m_RootOrder: 4
+  m_Father: {fileID: 1089154995}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1952727552
 SpriteRenderer:
@@ -12742,7 +12868,7 @@ GameObject:
   - component: {fileID: 2131294769}
   - component: {fileID: 2131294770}
   m_Layer: 0
-  m_Name: Guy1BrowShadow@2x
+  m_Name: Brow Shadow Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

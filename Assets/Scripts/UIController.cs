@@ -3,26 +3,27 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    private JawController jawController;
-    private ThroatController throatController;
-    public TMP_Text currHotdogText;
+    private JawController _jawController;
+    private ThroatController _throatController;
+    [SerializeField]
+    private TMP_Text _currHotdogText;
 
-    float currHotdogs = 0f;
-    void Start()
+    private float _currHotdogs = 0f;
+
+    private void Start()
     {
-        jawController = FindObjectOfType<JawController>();
-        throatController = FindObjectOfType<ThroatController>();
+        _jawController = FindObjectOfType<JawController>();
+        _throatController = FindObjectOfType<ThroatController>();
 
-        jawController.ChewEvent += OnChewOrSwallow;
-        throatController.SwallowEvent += OnChewOrSwallow;
+        _jawController.OnChew += OnChewOrSwallow;
+        _throatController.OnSwallow += OnChewOrSwallow;
     }
 
     private void OnChewOrSwallow() {
-        Invoke("UpdateHotdogCount", 0.05f);
+        Invoke("UpdateHotdogCount", 0.05f); // Smoll delay
     }
-
     private void UpdateHotdogCount() {
-        currHotdogs = throatController.TotalEaten;
-        currHotdogText.text = currHotdogs.ToString("n2");
+        _currHotdogs = _throatController.TotalSwallowed;
+        _currHotdogText.text = _currHotdogs.ToString("n2");
     }
 }

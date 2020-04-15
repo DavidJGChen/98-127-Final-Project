@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1160617163}
   - component: {fileID: 1160617164}
   m_Layer: 0
-  m_Name: hotdog-sprite
+  m_Name: Hotdog Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 3971493561984257107}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1160617164
 SpriteRenderer:
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 3971493561901533280}
   - component: {fileID: 3971493561901533283}
   m_Layer: 0
-  m_Name: Bite marks
+  m_Name: Bite Mark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,9 +171,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3971493561984257107}
-  - component: {fileID: 6472626892985950124}
   - component: {fileID: 4333765132139634473}
   - component: {fileID: 5338268840240252083}
+  - component: {fileID: 6472626892985950124}
   m_Layer: 0
   m_Name: Hotdog
   m_TagString: Untagged
@@ -192,26 +192,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3971493562429188781}
   - {fileID: 1160617163}
+  - {fileID: 3971493562429188781}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6472626892985950124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3971493561984257105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 060ab27ac19164e2cb24e9a0efa797ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jawController: {fileID: 0}
-  biteMask: {fileID: 3971493562429188781}
-  acceleration: 16
 --- !u!70 &4333765132139634473
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -249,6 +234,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6472626892985950124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3971493561984257105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 060ab27ac19164e2cb24e9a0efa797ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _biteMask: {fileID: 3971493562429188781}
+  acceleration: 16
 --- !u!1 &3971493562429188770
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3971493562429188781}
   m_Layer: 0
-  m_Name: BiteMask
+  m_Name: Bite Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,7 +278,7 @@ Transform:
   - {fileID: 3971493561901533280}
   - {fileID: 3971493562661268371}
   m_Father: {fileID: 3971493561984257107}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3971493562661268368
 GameObject:
@@ -292,7 +291,7 @@ GameObject:
   - component: {fileID: 3971493562661268371}
   - component: {fileID: 3971493562661268370}
   m_Layer: 0
-  m_Name: Hotdog mask
+  m_Name: Rectangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
