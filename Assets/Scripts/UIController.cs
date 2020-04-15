@@ -22,7 +22,7 @@ public class UIController : MonoBehaviour
     }
 
     private void UpdateHotdogCount() {
-        currHotdogs = throatController.CurrentHotDogs;
-        currHotdogText.text = currHotdogs.ToString();
+        currHotdogs = throatController.TotalEaten;
+        currHotdogText.text = currHotdogs.ToString("n2");
     }
 }

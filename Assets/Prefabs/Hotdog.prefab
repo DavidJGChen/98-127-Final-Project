@@ -211,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jawController: {fileID: 0}
   biteMask: {fileID: 3971493562429188781}
-  moveSpeed: 4
+  acceleration: 16
 --- !u!70 &4333765132139634473
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

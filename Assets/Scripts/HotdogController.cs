@@ -8,9 +8,12 @@ public class HotdogController : MonoBehaviour
     public Transform biteMask;
     private new Collider2D collider2D;
     [SerializeField]
-    private float moveSpeed = 8;
-    private bool move = false;
+    private float acceleration = 16f;
+    private float decceleration = 4f;
+    private float moveSpeed;
+    private bool accelerate = false;
     private bool collidingJaw = false;
+    private bool collidingThroat = false;
     private float percentageEaten = 0f;
     private float hotdogWidth;
     private float jawBitingLine;
@@ -28,22 +31,36 @@ public class HotdogController : MonoBehaviour
     }
     private void Update() {
         if (Input.GetKey(KeyCode.Space)) {
-            move = true;
+            accelerate = true;
         }
         else {
-            move = false;
+            accelerate = false;
         }
     }
     private void FixedUpdate() {
-        if (move) {
-            if (!collidingJaw || jawController.CanAcceptFood) {
-                this.transform.Translate(Vector2.right * Time.deltaTime * moveSpeed);
+        if (accelerate) {
+            moveSpeed += acceleration * Time.deltaTime;
+        }
+        else {
+            if (moveSpeed != 0) {
+                moveSpeed -= decceleration * Time.deltaTime;
             }
+        }
+        if (moveSpeed < 0) {
+            moveSpeed = 0;
+        }
+
+
+        if (!collidingThroat && (!collidingJaw || jawController.CanAcceptFood)) {
+            this.transform.Translate(Vector2.right * Time.deltaTime * moveSpeed);
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Jaw")) {
             collidingJaw = true;
+        }
+        if (other.CompareTag("Throat")) {
+            collidingThroat = true;
         }
     }
 
