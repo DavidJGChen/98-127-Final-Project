@@ -5,47 +5,65 @@ using System;
 
 public class ThroatController : MonoBehaviour
 {
-    private JawController jawController;
-    [SerializeField]
-    private GameObject chewedStage1;
-    [SerializeField]
-    private GameObject chewedStage2;
+    private JawController _jawController;
 
     [SerializeField]
-    private Transform[] throatWaypoints; 
+    private GameObject[] _foodStages;
+    private int _numStages;
+    private GameObject _firstFoodStage;
+    private GameObject _lastFoodStage;
 
-    private float currHotdogsStage1 = 0;
-    private float currHotdogsStage2 = 0;
+    [SerializeField]
+    private Transform[] _throatWaypoints;
 
+    // Settings
+    [SerializeField]
+    private float foodPerChew = 0.2f;
 
-    public event Action SwallowEvent;
-    // Start is called before the first frame update
-    private void Start()
-    {
-        jawController = FindObjectOfType<JawController>();
-
-        jawController.ChewEvent += ChewFood;
-
-        SwallowEvent += PrintSwallow;
-        SwallowEvent += Swallow;
+    // Other stuff
+    private float[] _currChewedFood;
+    private float _totalChewedFood;
+    private float[] _deltaChewedFood;
+    private float _totalSwallowed = 0;
+    public float TotalSwallowed {
+        get => _totalSwallowed;
     }
 
-    // Update is called once per frame
+    public event Action OnSwallow;
+
+    private void Start()
+    {
+        _jawController = FindObjectOfType<JawController>();
+        _jawController.OnChew += ChewFood;
+
+        _numStages = _foodStages.Length;
+        _currChewedFood = new float[_numStages];
+        _deltaChewedFood = new float[_numStages - 1];
+
+        _firstFoodStage = _foodStages[0];
+        
+        _lastFoodStage = _foodStages[_numStages - 1];
+        
+        for(int i = 0; i < _numStages; i++) {
+            _currChewedFood[i] = 0f;
+        }
+
+        OnSwallow += PrintSwallow;
+        OnSwallow += Swallow;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A)) {
             TrySwallow();
         }
     }
-
     private void TempSwallow() {
-        GameObject newFood = Instantiate(chewedStage2, chewedStage2.transform.position, chewedStage2.transform.rotation);
-
+        GameObject newFood = Instantiate(_lastFoodStage, _lastFoodStage.transform.position, _lastFoodStage.transform.rotation);
+        newFood.GetComponentInChildren<SpriteRenderer>().sortingOrder = 6; // Find a better way to do this
         StartCoroutine(TempSwallowCoroutine(newFood));
     }
-
     private IEnumerator TempSwallowCoroutine(GameObject food) {
-        foreach(Transform waypoint in throatWaypoints) {
+        foreach(Transform waypoint in _throatWaypoints) {
             Vector2 waypointPos = waypoint.position;
             while (Vector2.Distance(waypointPos, food.transform.position) > 0.001f) {
                 food.transform.position = Vector2.MoveTowards(food.transform.position, waypointPos, 4f * Time.deltaTime);
@@ -54,61 +72,55 @@ public class ThroatController : MonoBehaviour
         }
         Destroy(food);
     }
-
     private void TrySwallow() {
-        if (currHotdogsStage2 > 0) {
-            SwallowEvent();
+        if (_currChewedFood[_numStages - 1] > 0) {
+            OnSwallow();
         }
     }
-
     private void ChewFood() {
-        if (currHotdogsStage1 > 0 || currHotdogsStage2 > 0) {
-            float transfer = 0.2f;
-            if (currHotdogsStage1 < transfer) {
-                transfer = currHotdogsStage1;
+        for (int i = 0; i < _numStages - 1; i++) {
+            float transfer = foodPerChew;
+            if (_currChewedFood[i] < transfer) {
+                transfer = _currChewedFood[i];
             }
-            currHotdogsStage1 -= transfer;
-            currHotdogsStage2 += transfer;
-            print("food being chewed");
-            ScaleSprites();
-            RotateSprites();
+            _deltaChewedFood[i] = transfer;
+        }
+
+        for (int i = 0; i < _numStages - 1; i++) {
+            _currChewedFood[i] -= _deltaChewedFood[i];
+            _currChewedFood[i+1] += _deltaChewedFood[i];
+        }
+
+        ScaleSprites();
+        RotateSprites();
+    }
+    private void ScaleSprites() {
+        for (int i = 0; i < _numStages; i++) {
+            float rootCurr = Mathf.Sqrt(_currChewedFood[i]);
+            _foodStages[i].transform.localScale = new Vector2(rootCurr, rootCurr);
         }
     }
-
-    private void ScaleSprites() {
-        float rootcurr1 = Mathf.Sqrt(currHotdogsStage1);
-        float rootcurr2 = Mathf.Sqrt(currHotdogsStage2);
-
-        Vector2 newScaleStage1 = new Vector2(rootcurr1, rootcurr1);
-        Vector2 newScaleStage2 = new Vector2(rootcurr2, rootcurr2);
-        chewedStage1.transform.localScale = newScaleStage1;
-        chewedStage2.transform.localScale = newScaleStage2;
-    }
-
     private void RotateSprites() {
-        float random1 = UnityEngine.Random.Range(0,360f);
-        float random2 = UnityEngine.Random.Range(0,360f);
-
-        chewedStage1.transform.Rotate(0,0,random1);
-        chewedStage2.transform.Rotate(0,0,random2);
+        for (int i = 0; i < _numStages; i++) {
+            float random = UnityEngine.Random.Range(0,360f);
+            _foodStages[i].transform.Rotate(0,0,random);
+        }
     }
-
     private void Swallow() {
-        TempSwallow();
-        currHotdogsStage2 = 0;
+        TempSwallow(); // Graphics
+        _totalChewedFood -= _currChewedFood[_numStages - 1];
+        _totalSwallowed += _currChewedFood[_numStages - 1];
+        _currChewedFood[_numStages - 1] = 0;
         ScaleSprites();
+    }
+    private void PrintSwallow() {
+        print("swallow");
     }
 
     public void InsertFood(float percentage) {
-        currHotdogsStage1 += percentage;
+        _currChewedFood[0] += percentage;
+        _totalChewedFood += percentage;
+        
         ScaleSprites();
-    }
-
-    public float CurrentHotDogs {
-        get => currHotdogsStage1 + currHotdogsStage2;
-    }
-
-    private void PrintSwallow() {
-        print("swallow");
     }
 }
