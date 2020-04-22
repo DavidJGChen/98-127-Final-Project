@@ -4,6 +4,7 @@ using UnityEngine;
 public class JawController : MonoBehaviour
 {
     private ThroatController _throatController;
+    private ChokingController _chokingController;
     private ParticleSystem _foodParticleSystem;
     [SerializeField]
     private Transform _jaw;
@@ -36,6 +37,7 @@ public class JawController : MonoBehaviour
     private float _mouseVelocityY;
     private float _jawCurrentY;
     private bool _jawClosed;
+    private bool _isChoking = false;
     private bool _canAcceptFood;
     public bool CanAcceptFood {
         get => _canAcceptFood;
@@ -44,8 +46,15 @@ public class JawController : MonoBehaviour
     public event Action OnChew;
 
     private void Start() {
-        _throatController = FindObjectOfType<ThroatController>();
+        _throatController = GetComponent<ThroatController>();
+
+        _chokingController = GetComponent<ChokingController>();
+        _chokingController.OnChoke += () => _isChoking = true;
+        _chokingController.OnUnchoke += () => _isChoking = false;
+
+
         _foodParticleSystem = GetComponentInChildren<ParticleSystem>();
+
 
         _jawUpperLimitY = _jawUpperLimit.localPosition.y;
         _jawLowerLimitY = _jawLowerLimit.localPosition.y;
@@ -56,6 +65,10 @@ public class JawController : MonoBehaviour
     }
     private void Update() {
         _mouseVelocityY = Input.GetAxis("Mouse Y");
+
+        if (_isChoking) {
+            _mouseVelocityY = -0.5f;
+        }
     }
     private void FixedUpdate() {
         if (_mouseVelocityY == 0f) {

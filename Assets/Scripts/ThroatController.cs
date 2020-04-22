@@ -6,6 +6,7 @@ using System;
 public class ThroatController : MonoBehaviour
 {
     private JawController _jawController;
+    private ChokingController _chokingController;
 
     [SerializeField]
     private GameObject[] _foodStages;
@@ -15,6 +16,7 @@ public class ThroatController : MonoBehaviour
 
     [SerializeField]
     private Transform[] _throatWaypoints;
+    private int _numWaypoints;
 
     // Settings
     [SerializeField]
@@ -24,6 +26,8 @@ public class ThroatController : MonoBehaviour
     private float[] _currChewedFood;
     private float _totalChewedFood;
     private float[] _deltaChewedFood;
+    private float[] _currThroatFood;
+    private bool _isChoking;
     private float _totalSwallowed = 0;
     public float TotalSwallowed {
         get => _totalSwallowed;
@@ -33,8 +37,12 @@ public class ThroatController : MonoBehaviour
 
     private void Start()
     {
-        _jawController = FindObjectOfType<JawController>();
+        _jawController = GetComponent<JawController>();
         _jawController.OnChew += ChewFood;
+
+        _chokingController = GetComponent<ChokingController>();
+        _chokingController.OnChoke += () => _isChoking = true;
+        _chokingController.OnUnchoke += () => _isChoking = false;
 
         _numStages = _foodStages.Length;
         _currChewedFood = new float[_numStages];
@@ -48,12 +56,15 @@ public class ThroatController : MonoBehaviour
             _currChewedFood[i] = 0f;
         }
 
+        _numWaypoints = _throatWaypoints.Length;
+        _currThroatFood = new float[_numWaypoints];
+
         OnSwallow += PrintSwallow;
         OnSwallow += Swallow;
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)) {
+        if (Input.GetKeyDown(KeyCode.A) && !_isChoking) {
             TrySwallow();
         }
     }
