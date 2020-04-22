@@ -68,21 +68,42 @@ public class ThroatController : MonoBehaviour
             TrySwallow();
         }
     }
-    private void TempSwallow() {
+    private void TempSwallow(float foodAmount) {
         GameObject newFood = Instantiate(_lastFoodStage, _lastFoodStage.transform.position, _lastFoodStage.transform.rotation);
         newFood.GetComponentInChildren<SpriteRenderer>().sortingOrder = 6; // Find a better way to do this
-        StartCoroutine(TempSwallowCoroutine(newFood));
+        StartCoroutine(TempSwallowCoroutine(newFood, foodAmount));
     }
-    private IEnumerator TempSwallowCoroutine(GameObject food) {
+    private void FinishSwallow() {
+
+    }
+    private IEnumerator TempSwallowCoroutine(GameObject food, float foodAmount) {
         foreach(Transform waypoint in _throatWaypoints) {
             Vector2 waypointPos = waypoint.position;
             while (Vector2.Distance(waypointPos, food.transform.position) > 0.001f) {
+                if (_isChoking) {
+                    StartCoroutine(CoughCoroutine(food));
+                    yield break;
+                }
                 food.transform.position = Vector2.MoveTowards(food.transform.position, waypointPos, 4f * Time.deltaTime);
                 yield return null;
             } 
         }
+        _totalSwallowed += foodAmount;
         Destroy(food);
     }
+    private IEnumerator CoughCoroutine(GameObject food) {
+        Rigidbody2D rb2D = food.GetComponent<Rigidbody2D>();
+        Vector2 waypointPos = _throatWaypoints[0].position;
+        while (Vector2.Distance(waypointPos, food.transform.position) > 0.001f) {
+                food.transform.position = Vector2.MoveTowards(food.transform.position, waypointPos, 16f * Time.deltaTime);
+                yield return null;
+        }
+        rb2D.isKinematic = false;
+        rb2D.AddForce(Vector2.left * 16f, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(1f);
+        Destroy(food);
+    }
+
     private void TrySwallow() {
         if (_currChewedFood[_numStages - 1] > 0) {
             OnSwallow();
@@ -118,10 +139,10 @@ public class ThroatController : MonoBehaviour
         }
     }
     private void Swallow() {
-        TempSwallow(); // Graphics
         _totalChewedFood -= _currChewedFood[_numStages - 1];
-        _totalSwallowed += _currChewedFood[_numStages - 1];
+        float foodAmount = _currChewedFood[_numStages - 1];
         _currChewedFood[_numStages - 1] = 0;
+        TempSwallow(foodAmount); // Graphics
         ScaleSprites();
     }
     private void PrintSwallow() {

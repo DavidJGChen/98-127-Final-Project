@@ -6,6 +6,9 @@ using UnityEngine;
 public class ChokingController : MonoBehaviour
 {
     [SerializeField]
+    private GameObject _sweatParticles;
+    
+    [SerializeField]
     private float _defaultChokeSeconds = 2f;
 
     private float _currentChokingTime;
@@ -17,12 +20,15 @@ public class ChokingController : MonoBehaviour
     public event Action OnChoke;
     public event Action OnUnchoke;
 
+    private void Start() {
+        OnChoke += () => _sweatParticles.SetActive(true);
+        OnUnchoke += () => _sweatParticles.SetActive(false);
+    }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
             Choke();
         }
     }
-
     private void FixedUpdate() {
         if (_currentChokingTime > 0) {
             _currentChokingTime -= Time.deltaTime;

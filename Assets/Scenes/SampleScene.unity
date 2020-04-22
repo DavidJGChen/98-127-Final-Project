@@ -693,6 +693,7 @@ Transform:
   - {fileID: 1388191433}
   - {fileID: 1221274729}
   - {fileID: 550236782}
+  - {fileID: 1137531447}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6691,7 +6692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &1137531445
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -6732,7 +6733,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -11425,8 +11426,8 @@ Transform:
   m_LocalPosition: {x: 3.2, y: 3.44, z: -4.7351904}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 459269825}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -129.032, y: 89.99999, z: -90}
 --- !u!1 &1197554088
 GameObject:
@@ -11987,7 +11988,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: b4275280bfbdd634f98d1f06e7307f94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -12361,6 +12362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1630684990}
+  - component: {fileID: 1630684991}
   m_Layer: 0
   m_Name: Food Stage 4
   m_TagString: Untagged
@@ -12383,6 +12385,27 @@ Transform:
   m_Father: {fileID: 1546135845}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1630684991
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630684989}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 2
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1698528047
 GameObject:
   m_ObjectHideFlags: 0
@@ -17662,6 +17685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b11ced0fe7a4b23af838a61f4691da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sweatParticles: {fileID: 1137531444}
   _defaultChokeSeconds: 2
 --- !u!1 &1892520055
 GameObject:
