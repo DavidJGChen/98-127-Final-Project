@@ -17,10 +17,13 @@ public class ThroatController : MonoBehaviour
     [SerializeField]
     private Transform[] _throatWaypoints;
     private int _numWaypoints;
+    private GameObject[] _throatStages;
 
     // Settings
     [SerializeField]
-    private float foodPerChew = 0.2f;
+    private float _foodPerChew = 0.2f;
+    [SerializeField]
+    private static readonly KeyCode[] _keySequence = {KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F};
 
     // Other stuff
     private float[] _currChewedFood;
@@ -57,61 +60,39 @@ public class ThroatController : MonoBehaviour
         }
 
         _numWaypoints = _throatWaypoints.Length;
-        _currThroatFood = new float[_numWaypoints];
+        _currThroatFood = new float[_numWaypoints - 2];
+        _throatStages = new GameObject[_numWaypoints - 2];
+
+        if (_keySequence.Length != _numWaypoints - 1) {
+            print("SOMTING WONG");
+        }
 
         OnSwallow += PrintSwallow;
-        OnSwallow += Swallow;
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && !_isChoking) {
-            TrySwallow();
-        }
-    }
-    private void TempSwallow(float foodAmount) {
-        GameObject newFood = Instantiate(_lastFoodStage, _lastFoodStage.transform.position, _lastFoodStage.transform.rotation);
-        newFood.GetComponentInChildren<SpriteRenderer>().sortingOrder = 6; // Find a better way to do this
-        StartCoroutine(TempSwallowCoroutine(newFood, foodAmount));
-    }
-    private void FinishSwallow() {
-
-    }
-    private IEnumerator TempSwallowCoroutine(GameObject food, float foodAmount) {
-        foreach(Transform waypoint in _throatWaypoints) {
-            Vector2 waypointPos = waypoint.position;
-            while (Vector2.Distance(waypointPos, food.transform.position) > 0.001f) {
-                if (_isChoking) {
-                    StartCoroutine(CoughCoroutine(food));
-                    yield break;
+        if (!_isChoking){
+            for (int i = 0; i < _numWaypoints - 1; i++) {
+                KeyCode keyCode = _keySequence[i];
+                if (Input.GetKeyDown(keyCode)) {
+                    TrySwallow(i);
                 }
-                food.transform.position = Vector2.MoveTowards(food.transform.position, waypointPos, 4f * Time.deltaTime);
-                yield return null;
-            } 
+            }
         }
-        _totalSwallowed += foodAmount;
-        Destroy(food);
-    }
-    private IEnumerator CoughCoroutine(GameObject food) {
-        Rigidbody2D rb2D = food.GetComponent<Rigidbody2D>();
-        Vector2 waypointPos = _throatWaypoints[0].position;
-        while (Vector2.Distance(waypointPos, food.transform.position) > 0.001f) {
-                food.transform.position = Vector2.MoveTowards(food.transform.position, waypointPos, 16f * Time.deltaTime);
-                yield return null;
-        }
-        rb2D.isKinematic = false;
-        rb2D.AddForce(Vector2.left * 16f, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(1f);
-        Destroy(food);
-    }
-
-    private void TrySwallow() {
-        if (_currChewedFood[_numStages - 1] > 0) {
-            OnSwallow();
+        else {
+            for (int i = 0; i < _numWaypoints - 2; i++) {
+                GameObject food = _throatStages[i];
+                if (food != null) {
+                    _currThroatFood[i] = 0;
+                    StartCoroutine(CoughCoroutine(food));
+                }
+                _throatStages[i] = null;
+            }
         }
     }
     private void ChewFood() {
         for (int i = 0; i < _numStages - 1; i++) {
-            float transfer = foodPerChew;
+            float transfer = _foodPerChew;
             if (_currChewedFood[i] < transfer) {
                 transfer = _currChewedFood[i];
             }
@@ -138,12 +119,111 @@ public class ThroatController : MonoBehaviour
             _foodStages[i].transform.Rotate(0,0,random);
         }
     }
-    private void Swallow() {
+    private IEnumerator BeginSwallowCoroutine(GameObject food, float foodAmount) {
+        Vector2 entrancePos = _throatWaypoints[0].position;
+        while (Vector2.Distance(entrancePos, food.transform.position) > 0.001f) {
+            if (_isChoking) {
+                StartCoroutine(CoughCoroutine(food));
+                yield break;
+            }
+            food.transform.position = Vector2.MoveTowards(food.transform.position, entrancePos, 4f * Time.deltaTime);
+            yield return null;
+        }
+        StartCoroutine(SwallowCoroutine(food, 0, foodAmount));
+    }
+    private IEnumerator SwallowCoroutine(GameObject food, int stage, float foodAmount) {
+        print($"Stage: {stage}");
+
+        Vector2 waypointPos = _throatWaypoints[stage + 1].position;
+        while (Vector2.Distance(waypointPos, food.transform.position) > 0.001f) {
+            if (_isChoking) {
+                StartCoroutine(CoughCoroutine(food));
+                yield break;
+            }
+            food.transform.position = Vector2.MoveTowards(food.transform.position, waypointPos, 4f * Time.deltaTime);
+            yield return null;
+        }
+
+        if (stage == _numWaypoints - 2) {
+            _totalSwallowed += foodAmount;
+            Destroy(food);
+            yield break;
+        }
+
+        // TODO CHOKE THING
+        if (_currThroatFood[stage] > 0) {
+            float newFoodAmount = _currThroatFood[stage] + foodAmount;
+            _currThroatFood[stage] = newFoodAmount;
+
+            Destroy(_throatStages[stage]);
+
+            float rootCurr = Mathf.Sqrt(newFoodAmount);
+
+            food.transform.localScale = new Vector2(rootCurr, rootCurr);
+
+            if (newFoodAmount > 0.5f) {
+                _chokingController.Choke();
+            }
+        }
+        else {
+            _currThroatFood[stage] = foodAmount;
+        }
+        _throatStages[stage] = food;
+    }
+    private IEnumerator CoughCoroutine(GameObject food) {
+        Rigidbody2D rb2D = food.GetComponent<Rigidbody2D>();
+        Vector2 waypointPos = _throatWaypoints[0].position;
+        while (Vector2.Distance(waypointPos, food.transform.position) > 0.001f) {
+                food.transform.position = Vector2.MoveTowards(food.transform.position, waypointPos, 16f * Time.deltaTime);
+                yield return null;
+        }
+        rb2D.isKinematic = false;
+        rb2D.AddForce(Vector2.left * 16f, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(1f);
+        Destroy(food);
+    }
+    private void FinishSwallow() {
+
+    }
+    private void TrySwallow(int stage) {
+        if (stage == 0) {
+            if (_currChewedFood[_numStages - 1] > 0) {
+                OnSwallow();
+                MouthToThroat();
+            }
+        }
+        else {
+            if (_currThroatFood[stage - 1] > 0) {
+                ThroatSwallow(stage);
+            }
+        }
+    }
+    private void MouthToThroat() {
         _totalChewedFood -= _currChewedFood[_numStages - 1];
         float foodAmount = _currChewedFood[_numStages - 1];
         _currChewedFood[_numStages - 1] = 0;
-        TempSwallow(foodAmount); // Graphics
+        GameObject newFood = Instantiate(_lastFoodStage, _lastFoodStage.transform.position, _lastFoodStage.transform.rotation);
+        newFood.GetComponentInChildren<SpriteRenderer>().sortingOrder = 6; // Find a better way to do this
+        StartCoroutine(BeginSwallowCoroutine(newFood, foodAmount));
         ScaleSprites();
+    }
+    private void ThroatSwallow(int stage) {
+        if (stage == 0) {
+            print("What");
+            return;
+        }
+        GameObject food = _throatStages[stage - 1];
+
+        if (food == null) {
+            print("NULL");
+            return;
+        }
+
+        float foodAmount = _currThroatFood[stage - 1];
+        _currThroatFood[stage - 1] = 0;
+        _throatStages[stage - 1] = null;
+
+        StartCoroutine(SwallowCoroutine(food, stage, foodAmount));
     }
     private void PrintSwallow() {
         print("swallow");
