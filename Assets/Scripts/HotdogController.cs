@@ -5,6 +5,7 @@ public class HotdogController : MonoBehaviour
     private JawController _jawController;
     private ChokingController _chokingController;
     private HotdogSpawnerController _hotdogSpawnerController;
+    private GameController _gameController;
     private Collider2D _collider2D;
 
     [SerializeField]
@@ -30,6 +31,8 @@ public class HotdogController : MonoBehaviour
         _collider2D = GetComponent<Collider2D>();
         _hotdogWidth = _collider2D.bounds.size.x;
 
+        _gameController = FindObjectOfType<GameController>();
+
         _jawController = FindObjectOfType<JawController>();
         _jawController.OnChew += GetBitten;
         _jawBitingLineX = _jawController.GetBiteLineX();
@@ -42,14 +45,25 @@ public class HotdogController : MonoBehaviour
         _chokingController.OnUnchoke += () => _isChoking = false;
     }
     private void Update() {
+        if (!_gameController.Started) {
+            return;
+        }
         if (Input.GetKey(KeyCode.Space)) {
             _accelerate = true;
         }
         else {
             _accelerate = false;
         }
+
+        if (_collidingThroat && _percentageEaten < 0.2f) {
+            _chokingController.Choke();
+        }
     }
     private void FixedUpdate() {
+        if (!_gameController.Started) {
+            return;
+        }
+
         if (_accelerate) {
             _moveSpeed += _acceleration * Time.deltaTime;
         }
@@ -63,6 +77,10 @@ public class HotdogController : MonoBehaviour
             if (_moveSpeed > 0f) {
                 _moveSpeed = 0;
             }
+        }
+
+        if (_isChoking) {
+            _moveSpeed = -1f;
         }
 
 

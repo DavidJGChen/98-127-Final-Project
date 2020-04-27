@@ -13,8 +13,6 @@ public class HotdogSpawnerController : MonoBehaviour
 
     private void Start() {
         _particleSystem = GetComponentInChildren<ParticleSystem>();
-
-        SpawnHotdog();
     }
 
     public void SpawnHotdog() {

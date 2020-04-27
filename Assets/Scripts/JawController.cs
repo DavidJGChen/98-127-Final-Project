@@ -5,6 +5,7 @@ public class JawController : MonoBehaviour
 {
     private ThroatController _throatController;
     private ChokingController _chokingController;
+    private GameController _gameController;
     private ParticleSystem _foodParticleSystem;
     [SerializeField]
     private Transform _jaw;
@@ -46,6 +47,8 @@ public class JawController : MonoBehaviour
     public event Action OnChew;
 
     private void Start() {
+        _gameController = FindObjectOfType<GameController>();
+
         _throatController = GetComponent<ThroatController>();
 
         _chokingController = GetComponent<ChokingController>();
@@ -64,6 +67,10 @@ public class JawController : MonoBehaviour
         OnChew += PrintNom;
     }
     private void Update() {
+        // if (!_gameController.Started) {
+        //     return;
+        // }
+
         _mouseVelocityY = Input.GetAxis("Mouse Y");
 
         if (_isChoking) {
@@ -71,6 +78,10 @@ public class JawController : MonoBehaviour
         }
     }
     private void FixedUpdate() {
+        // if (!_gameController.Started) {
+        //     return;
+        // }
+
         if (_mouseVelocityY == 0f) {
             return;
         }

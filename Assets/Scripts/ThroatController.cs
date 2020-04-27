@@ -7,6 +7,7 @@ public class ThroatController : MonoBehaviour
 {
     private JawController _jawController;
     private ChokingController _chokingController;
+    private GameController _gameController;
 
     [SerializeField]
     private GameObject[] _foodStages;
@@ -40,6 +41,8 @@ public class ThroatController : MonoBehaviour
 
     private void Start()
     {
+        _gameController = FindObjectOfType<GameController>();
+
         _jawController = GetComponent<JawController>();
         _jawController.OnChew += ChewFood;
 
@@ -71,6 +74,9 @@ public class ThroatController : MonoBehaviour
     }
     private void Update()
     {
+        if (!_gameController.Started) {
+            return;
+        }
         if (!_isChoking){
             for (int i = 0; i < _numWaypoints - 1; i++) {
                 KeyCode keyCode = _keySequence[i];
@@ -126,7 +132,7 @@ public class ThroatController : MonoBehaviour
                 StartCoroutine(CoughCoroutine(food));
                 yield break;
             }
-            food.transform.position = Vector2.MoveTowards(food.transform.position, entrancePos, 4f * Time.deltaTime);
+            food.transform.position = Vector2.MoveTowards(food.transform.position, entrancePos, 8f * Time.deltaTime);
             yield return null;
         }
         StartCoroutine(SwallowCoroutine(food, 0, foodAmount));
@@ -146,11 +152,12 @@ public class ThroatController : MonoBehaviour
 
         if (stage == _numWaypoints - 2) {
             _totalSwallowed += foodAmount;
+            OnSwallow();
             Destroy(food);
             yield break;
         }
 
-        // TODO CHOKE THING
+        // Merging
         if (_currThroatFood[stage] > 0) {
             float newFoodAmount = _currThroatFood[stage] + foodAmount;
             _currThroatFood[stage] = newFoodAmount;
@@ -160,15 +167,15 @@ public class ThroatController : MonoBehaviour
             float rootCurr = Mathf.Sqrt(newFoodAmount);
 
             food.transform.localScale = new Vector2(rootCurr, rootCurr);
-
-            if (newFoodAmount > 0.5f) {
-                _chokingController.Choke();
-            }
         }
         else {
             _currThroatFood[stage] = foodAmount;
         }
         _throatStages[stage] = food;
+
+        if (_currThroatFood[stage] > 0.5f) {
+                _chokingController.Choke();
+        }
     }
     private IEnumerator CoughCoroutine(GameObject food) {
         Rigidbody2D rb2D = food.GetComponent<Rigidbody2D>();
@@ -182,13 +189,9 @@ public class ThroatController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Destroy(food);
     }
-    private void FinishSwallow() {
-
-    }
     private void TrySwallow(int stage) {
         if (stage == 0) {
             if (_currChewedFood[_numStages - 1] > 0) {
-                OnSwallow();
                 MouthToThroat();
             }
         }
