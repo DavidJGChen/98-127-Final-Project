@@ -116,6 +116,7 @@ public class ThroatController : MonoBehaviour
     private void ScaleSprites() {
         for (int i = 0; i < _numStages; i++) {
             float rootCurr = Mathf.Sqrt(_currChewedFood[i]);
+            rootCurr = Mathf.Clamp(rootCurr, 0f, 1f);
             _foodStages[i].transform.localScale = new Vector2(rootCurr, rootCurr);
         }
     }

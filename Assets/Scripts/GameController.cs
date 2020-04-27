@@ -56,6 +56,9 @@ public class GameController : MonoBehaviour
                     _freezeTime -= Time.deltaTime;
                     if (_freezeTime <= 0) {
                         _started = true;
+                        if (_hotdogSpawnerController == null) {
+                            _hotdogSpawnerController = FindObjectOfType<HotdogSpawnerController>();
+                        }
                         _hotdogSpawnerController.SpawnHotdog();
                     }
                 }
