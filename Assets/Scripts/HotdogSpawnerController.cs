@@ -14,10 +14,9 @@ public class HotdogSpawnerController : MonoBehaviour
     private void Start() {
         _particleSystem = GetComponentInChildren<ParticleSystem>();
     }
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.E)) {
-            Instantiate(_hotdogPrefab, transform.position, Quaternion.identity);
-            _particleSystem.Emit(_particles);
-        }
+
+    public void SpawnHotdog() {
+        Instantiate(_hotdogPrefab, transform.position, Quaternion.identity);
+        _particleSystem.Emit(_particles);
     }
 }
