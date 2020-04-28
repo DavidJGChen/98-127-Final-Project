@@ -16,15 +16,14 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Credits() {
-        if (SceneManager.GetSceneByName("CreditsScene") == null) {
-            print("Credits does not exist yet!");
-            return;
-        }
-
         SceneManager.LoadScene("CreditsScene");
     }
 
     public void Quit() {
         Application.Quit(0);
+    }
+
+    public void Back() {
+        SceneManager.LoadScene("TitleScene");
     }
 }
