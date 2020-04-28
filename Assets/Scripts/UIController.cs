@@ -57,6 +57,7 @@ public class UIController : MonoBehaviour
     }
     private void DisplayResults() {
         _resultsPanel.SetActive(true);
+        _resultsPanel.GetComponentInChildren<TMP_Text>().text = $"x {_currHotdogs.ToString("n1")}";
     }
 
     private void OnChewOrSwallow() {

@@ -24,30 +24,32 @@ public class GameController : MonoBehaviour
         get => _started;
     }
     // Start is called before the first frame update
+    private void Awake() {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
+
+        if (objs.Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+    }
     private void Start()
     {
         _hotdogSpawnerController = FindObjectOfType<HotdogSpawnerController>();
 
-        _started = false;
-        _timeLeft = _initialTime;
-
-        DontDestroyOnLoad(this.gameObject);
+        InitGame();
     }
-    private void InitGame() {
+    public void InitGame() {
+
         _started = false;
         _timeLeft = _initialTime;
         _freezeTime = 3f;
+
+        GetComponent<AudioSource>().Play();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0)){
-            SceneManager.LoadScene("SampleScene");
-            InitGame();
-            return;
-        }
-
         Scene currScene = SceneManager.GetActiveScene();
 
         if (currScene.name == "SampleScene") {
@@ -73,5 +75,27 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ResetGame() {
+        Scene currScene = SceneManager.GetActiveScene();
+
+        if (currScene.name != "SampleScene") {
+            print("Error: Calling 'ResetGame' outside of SampleScene");
+            return;
+        }
+        SceneManager.LoadScene("SampleScene");
+        InitGame();
+    }
+
+    public void BackToMenu() {
+        Scene currScene = SceneManager.GetActiveScene();
+
+        if (currScene.name != "SampleScene") {
+            print("Error: Calling 'BackToMenu' outside of SampleScene");
+            return;
+        }
+        print("wtf");
+        SceneManager.LoadScene("TitleScene");
     }
 }

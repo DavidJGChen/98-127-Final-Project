@@ -7,6 +7,13 @@ public class ChokingController : MonoBehaviour
 {
     [SerializeField]
     private GameObject _sweatParticles;
+    [SerializeField]
+    private GameObject _eyeShadow;
+    [SerializeField]
+    private GameObject _eyeBrow;
+    [SerializeField]
+    private GameObject _eyePupil;
+
     
     [SerializeField]
     private float _defaultChokeSeconds = 2f;
@@ -23,6 +30,12 @@ public class ChokingController : MonoBehaviour
     private void Start() {
         OnChoke += () => _sweatParticles.SetActive(true);
         OnUnchoke += () => _sweatParticles.SetActive(false);
+
+        OnChoke += MoveEyebrowsUp;
+        OnUnchoke += MoveEyebrowsDown;
+
+        OnChoke += ShrinkPupil;
+        OnUnchoke += ExpandPupil;
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
@@ -38,11 +51,27 @@ public class ChokingController : MonoBehaviour
         }
     }
 
+    private void MoveEyebrowsUp() {
+        _eyeBrow.transform.Translate(Vector2.up * 0.1f);
+        _eyeShadow.transform.Translate(Vector2.up * 0.1f);
+    }
+    private void MoveEyebrowsDown() {
+        _eyeBrow.transform.Translate(Vector2.down * 0.1f);
+        _eyeShadow.transform.Translate(Vector2.down * 0.1f);
+    }
+
+    private void ShrinkPupil() {
+        _eyePupil.transform.localScale *= 0.5f;
+    }
+    private void ExpandPupil() {
+        _eyePupil.transform.localScale *= 2f;
+    }
+
+
     private void Unchoke() {
         _isChoking = false;
         OnUnchoke();
     }
-
     public void Choke() {
         Choke(_defaultChokeSeconds);
     }
