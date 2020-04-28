@@ -13,9 +13,19 @@ public class UIController : MonoBehaviour
     private GameObject _tempExclamation;
     [SerializeField]
     private GameObject _resultsPanel;
-    
     [SerializeField]
     private TMP_Text _timerText;
+
+    [SerializeField]
+    private SpriteRenderer[] _keyRenderers;
+
+    [SerializeField]
+    private Sprite _keyUpSprite;
+    [SerializeField]
+    private Sprite _keyDownSprite;
+
+    [SerializeField]
+    private static readonly KeyCode[] _keySequence = {KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F};
 
     private float _currHotdogs = 0f;
     private bool _gameOver = false;
@@ -34,6 +44,17 @@ public class UIController : MonoBehaviour
         _chokingController.OnUnchoke += OnUnchoke;
     }
     private void Update() {
+
+        for (int i = 0; i < _keySequence.Length; i++) {
+            KeyCode keyCode = _keySequence[i];
+            if (Input.GetKeyDown(keyCode)) {
+                _keyRenderers[i].sprite = _keyDownSprite;
+            }
+            if (Input.GetKeyUp(keyCode)) {
+                _keyRenderers[i].sprite = _keyUpSprite;
+            }
+        }
+
         if (_gameOver) {
             return;
         }
