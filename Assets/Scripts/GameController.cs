@@ -44,9 +44,14 @@ public class GameController : MonoBehaviour
         _timeLeft = _initialTime;
         _freezeTime = 3f;
 
+        Invoke("PlayMusic", 0.5f);
+    }
+    private void PlayMusic() {
         GetComponent<AudioSource>().Play();
     }
-
+    private void StopMusic() {
+        GetComponent<AudioSource>().Stop();
+    }
     // Update is called once per frame
     private void Update()
     {
@@ -71,6 +76,7 @@ public class GameController : MonoBehaviour
                     if (_timeLeft < 0) {
                         _timeLeft = 0;
                         _started = false;
+                        // StopMusic();
                     }
                 }
             }
