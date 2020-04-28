@@ -13,6 +13,7 @@ public class ChokingController : MonoBehaviour
     private GameObject _eyeBrow;
     [SerializeField]
     private GameObject _eyePupil;
+    private AudioSource _coughSound;
 
     
     [SerializeField]
@@ -28,6 +29,8 @@ public class ChokingController : MonoBehaviour
     public event Action OnUnchoke;
 
     private void Start() {
+        _coughSound = GetComponent<AudioSource>();
+
         OnChoke += () => _sweatParticles.SetActive(true);
         OnUnchoke += () => _sweatParticles.SetActive(false);
 
@@ -36,6 +39,8 @@ public class ChokingController : MonoBehaviour
 
         OnChoke += ShrinkPupil;
         OnUnchoke += ExpandPupil;
+
+        OnChoke += Cough;
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
@@ -49,6 +54,10 @@ public class ChokingController : MonoBehaviour
                 Unchoke();
             }
         }
+    }
+
+    private void Cough() {
+        _coughSound.Play();
     }
 
     private void MoveEyebrowsUp() {

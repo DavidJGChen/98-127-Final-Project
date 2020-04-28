@@ -7,6 +7,7 @@ public class HotdogController : MonoBehaviour
     private HotdogSpawnerController _hotdogSpawnerController;
     private GameController _gameController;
     private Collider2D _collider2D;
+    private AudioSource _biteSound;
 
     [SerializeField]
     private Transform _biteMask;
@@ -30,6 +31,8 @@ public class HotdogController : MonoBehaviour
     private void Start() {
         _collider2D = GetComponent<Collider2D>();
         _hotdogWidth = _collider2D.bounds.size.x;
+
+        _biteSound = GetComponent<AudioSource>();
 
         _gameController = FindObjectOfType<GameController>();
 
@@ -129,6 +132,7 @@ public class HotdogController : MonoBehaviour
                     _jawController.InsertFood(_percentageEaten - oldPercentageEaten);
                     _jawController.EmitParticles();
                     UpdateSpriteMask();
+                    BiteSound();
                 }
                 else {
                     _percentageEaten = oldPercentageEaten;
@@ -139,6 +143,9 @@ public class HotdogController : MonoBehaviour
                 }
             }
         }
+    }
+    private void BiteSound() {
+        _biteSound.Play();
     }
     private void UpdateSpriteMask() {
         Vector2 newPos = Vector2.zero;
