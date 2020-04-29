@@ -7,7 +7,6 @@ public class HotdogController : MonoBehaviour
     private HotdogSpawnerController _hotdogSpawnerController;
     private GameController _gameController;
     private Collider2D _collider2D;
-    private AudioSource _biteSound;
 
     [SerializeField]
     private Transform _biteMask;
@@ -32,8 +31,6 @@ public class HotdogController : MonoBehaviour
         _collider2D = GetComponent<Collider2D>();
         _hotdogWidth = _collider2D.bounds.size.x;
 
-        _biteSound = GetComponent<AudioSource>();
-
         _gameController = FindObjectOfType<GameController>();
 
         _jawController = FindObjectOfType<JawController>();
@@ -43,7 +40,6 @@ public class HotdogController : MonoBehaviour
         _hotdogSpawnerController = FindObjectOfType<HotdogSpawnerController>();
 
         _chokingController = FindObjectOfType<ChokingController>();
-        _chokingController.OnChoke += PushBack;
         _chokingController.OnChoke += () => _isChoking = true;
         _chokingController.OnUnchoke += () => _isChoking = false;
     }
@@ -67,6 +63,12 @@ public class HotdogController : MonoBehaviour
             return;
         }
 
+        if (_isChoking) {
+            _moveSpeed = -1;
+            this.transform.Translate(Vector2.right * _moveSpeed * Time.deltaTime);
+            return;
+        }
+
         if (_accelerate) {
             _moveSpeed += _acceleration * Time.deltaTime;
         }
@@ -82,15 +84,8 @@ public class HotdogController : MonoBehaviour
             }
         }
 
-        if (_isChoking) {
-            _moveSpeed = -1f;
-        }
-
 
         if (!_collidingThroat && (!_collidingJaw || _jawController.CanAcceptFood)) {
-            this.transform.Translate(Vector2.right * _moveSpeed * Time.deltaTime);
-        }
-        else if (_isChoking && _moveSpeed < 0f) {
             this.transform.Translate(Vector2.right * _moveSpeed * Time.deltaTime);
         }
     }
@@ -110,10 +105,6 @@ public class HotdogController : MonoBehaviour
             _collidingThroat = false;
         }
     }
-
-    private void PushBack() {
-        _moveSpeed = -4f;
-    }
     private void GetBitten() {
         if (_collidingJaw) {
             float currentX = _collider2D.bounds.max.x;
@@ -131,8 +122,8 @@ public class HotdogController : MonoBehaviour
                 if (_percentageEaten - oldPercentageEaten > 0) {
                     _jawController.InsertFood(_percentageEaten - oldPercentageEaten);
                     _jawController.EmitParticles();
+                    _jawController.BiteSound();
                     UpdateSpriteMask();
-                    BiteSound();
                 }
                 else {
                     _percentageEaten = oldPercentageEaten;
@@ -143,9 +134,6 @@ public class HotdogController : MonoBehaviour
                 }
             }
         }
-    }
-    private void BiteSound() {
-        _biteSound.Play();
     }
     private void UpdateSpriteMask() {
         Vector2 newPos = Vector2.zero;

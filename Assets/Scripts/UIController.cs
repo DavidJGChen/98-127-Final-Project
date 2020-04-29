@@ -26,6 +26,9 @@ public class UIController : MonoBehaviour
 
     [SerializeField]
     private static readonly KeyCode[] _keySequence = {KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F};
+    [SerializeField]
+    private float _redFlashInterval = 0.25f;
+    private float _redFlashTime = 0f;
 
     private float _currHotdogs = 0f;
     private bool _gameOver = false;
@@ -56,6 +59,7 @@ public class UIController : MonoBehaviour
         }
 
         if (_gameOver) {
+            _timerText.color = Color.red;
             return;
         }
 
@@ -64,6 +68,17 @@ public class UIController : MonoBehaviour
                 _gameStarted = true;
             }
             _timerText.text = _gameController.TimeLeft.ToString("n2");
+
+            if (_gameController.TimeLeft < 5f) {
+                _redFlashTime -= Time.deltaTime;
+                if (_redFlashTime <= -_redFlashInterval) {
+                    _timerText.color = Color.red; 
+                    _redFlashTime = _redFlashInterval;
+                }
+                else if (_redFlashTime <= 0) {
+                    _timerText.color = Color.white;
+                }
+            }
         }
         else {
             if (!_gameStarted) {
@@ -72,7 +87,7 @@ public class UIController : MonoBehaviour
             else {
                 _gameOver = true;
                 _timerText.text = "TIME!";
-                Invoke("DisplayResults", 2f);
+                Invoke("DisplayResults", 1f);
             }
         }
     }

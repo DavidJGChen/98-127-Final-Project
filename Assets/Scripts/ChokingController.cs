@@ -42,11 +42,6 @@ public class ChokingController : MonoBehaviour
 
         OnChoke += Cough;
     }
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            Choke();
-        }
-    }
     private void FixedUpdate() {
         if (_currentChokingTime > 0) {
             _currentChokingTime -= Time.deltaTime;

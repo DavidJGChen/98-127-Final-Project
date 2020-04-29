@@ -9,6 +9,8 @@ public class JawController : MonoBehaviour
     private ParticleSystem _foodParticleSystem;
     [SerializeField]
     private Transform _jaw;
+    [SerializeField]
+    private AudioSource _biteSound;
 
     [SerializeField]
     private Transform _jawUpperLimit;
@@ -57,7 +59,6 @@ public class JawController : MonoBehaviour
 
 
         _foodParticleSystem = GetComponentInChildren<ParticleSystem>();
-
 
         _jawUpperLimitY = _jawUpperLimit.localPosition.y;
         _jawLowerLimitY = _jawLowerLimit.localPosition.y;
@@ -119,5 +120,8 @@ public class JawController : MonoBehaviour
     }
     public void EmitParticles() {
         _foodParticleSystem.Emit(_particles);
+    }
+    public void BiteSound() {
+        _biteSound.Play();
     }
 }
