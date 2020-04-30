@@ -47,8 +47,7 @@ public class GameController : MonoBehaviour
         _timeLeft = _initialTime;
         _freezeTime = 3f;
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        UnPauseGame();
 
         Invoke("PlayMusic", 0.5f);
     }

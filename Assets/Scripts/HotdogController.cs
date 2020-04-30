@@ -54,6 +54,10 @@ public class HotdogController : MonoBehaviour
             _accelerate = false;
         }
 
+        if (_chokingController.IsChoking) {
+            _isChoking = true;
+        }
+
         if (_collidingThroat && _percentageEaten < 0.2f) {
             _chokingController.Choke();
         }
