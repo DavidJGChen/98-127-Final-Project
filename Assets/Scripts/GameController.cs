@@ -48,6 +48,7 @@ public class GameController : MonoBehaviour
         _freezeTime = 3f;
 
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         Invoke("PlayMusic", 0.5f);
     }
@@ -92,6 +93,7 @@ public class GameController : MonoBehaviour
                         _timeLeft = 0;
                         _started = false;
                         Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
                         // StopMusic();
                     }
                 }
@@ -103,12 +105,14 @@ public class GameController : MonoBehaviour
         Time.timeScale = 0;
         _pausePanel.SetActive(true);
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void UnPauseGame() {
         Time.timeScale = 1;
         _pausePanel.SetActive(false);
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ResetGame() {
