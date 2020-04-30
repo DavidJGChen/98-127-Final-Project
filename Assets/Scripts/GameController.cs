@@ -8,6 +8,9 @@ public class GameController : MonoBehaviour
     private HotdogSpawnerController _hotdogSpawnerController;
 
     [SerializeField]
+    private GameObject _pausePanel;
+
+    [SerializeField]
     private float _initialTime = 15f;
 
     private float _freezeTime = 3f;
@@ -44,6 +47,8 @@ public class GameController : MonoBehaviour
         _timeLeft = _initialTime;
         _freezeTime = 3f;
 
+        Cursor.visible = false;
+
         Invoke("PlayMusic", 0.5f);
     }
     private void PlayMusic() {
@@ -58,6 +63,16 @@ public class GameController : MonoBehaviour
         Scene currScene = SceneManager.GetActiveScene();
 
         if (currScene.name == "SampleScene") {
+
+            if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) {
+                if (!_pausePanel.activeInHierarchy) {
+                    PauseGame();
+                }
+                else if (_pausePanel.activeInHierarchy) {
+                    UnPauseGame();
+                }
+            }
+
             if (!_started) {
                 if (_freezeTime > 0) {
                     _freezeTime -= Time.deltaTime;
@@ -76,11 +91,24 @@ public class GameController : MonoBehaviour
                     if (_timeLeft < 0) {
                         _timeLeft = 0;
                         _started = false;
+                        Cursor.visible = true;
                         // StopMusic();
                     }
                 }
             }
         }
+    }
+
+    public void PauseGame() {
+        Time.timeScale = 0;
+        _pausePanel.SetActive(true);
+        Cursor.visible = true;
+    }
+
+    public void UnPauseGame() {
+        Time.timeScale = 1;
+        _pausePanel.SetActive(false);
+        Cursor.visible = false;
     }
 
     public void ResetGame() {
