@@ -24,6 +24,8 @@ public class ThroatController : MonoBehaviour
     [SerializeField]
     private float _foodPerChew = 0.2f;
     [SerializeField]
+    private float _chokingThreshold = 0.5f;
+    [SerializeField]
     private static readonly KeyCode[] _keySequence = {KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F};
 
     // Other stuff
@@ -174,7 +176,7 @@ public class ThroatController : MonoBehaviour
         }
         _throatStages[stage] = food;
 
-        if (_currThroatFood[stage] > 0.5f) {
+        if (_currThroatFood[stage] > _chokingThreshold) {
                 _chokingController.Choke();
         }
     }
@@ -203,11 +205,25 @@ public class ThroatController : MonoBehaviour
         }
     }
     private void MouthToThroat() {
-        _totalChewedFood -= _currChewedFood[_numStages - 1];
         float foodAmount = _currChewedFood[_numStages - 1];
-        _currChewedFood[_numStages - 1] = 0;
+
+        if (foodAmount > _chokingThreshold) {
+            foodAmount = 0.4f;
+            _currChewedFood[_numStages - 1] -= foodAmount;
+        }
+        else {
+            _currChewedFood[_numStages - 1] = 0f;
+        }
+        _totalChewedFood -= foodAmount;
+
         GameObject newFood = Instantiate(_lastFoodStage, _lastFoodStage.transform.position, _lastFoodStage.transform.rotation);
+
+        float rootCurr = Mathf.Sqrt(foodAmount);
+        rootCurr = Mathf.Clamp(rootCurr, 0f, 0.8f);
+        newFood.transform.localScale = new Vector2(rootCurr, rootCurr);
+
         newFood.GetComponentInChildren<SpriteRenderer>().sortingOrder = 6; // Find a better way to do this
+
         StartCoroutine(BeginSwallowCoroutine(newFood, foodAmount));
         ScaleSprites();
     }
