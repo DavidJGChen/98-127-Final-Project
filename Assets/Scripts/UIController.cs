@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIController : MonoBehaviour
@@ -23,6 +24,10 @@ public class UIController : MonoBehaviour
     private Sprite _keyUpSprite;
     [SerializeField]
     private Sprite _keyDownSprite;
+
+    [SerializeField] private GameObject _star1;
+    [SerializeField] private GameObject _star2;
+    [SerializeField] private GameObject _star3;
 
     [SerializeField]
     private static readonly KeyCode[] _keySequence = {KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F};
@@ -94,6 +99,20 @@ public class UIController : MonoBehaviour
     private void DisplayResults() {
         _resultsPanel.SetActive(true);
         _resultsPanel.GetComponentInChildren<TMP_Text>().text = $"x {_currHotdogs.ToString("n1")}";
+
+        _star1.SetActive(false);
+        _star2.SetActive(false);
+        _star3.SetActive(false);
+
+        if (_currHotdogs >= 6f) {
+            _star1.SetActive(true);
+        }
+        if (_currHotdogs >= 15f) {
+            _star2.SetActive(true);
+        }
+        if (_currHotdogs >= 24f) {
+            _star3.SetActive(true);
+        }
     }
 
     private void OnChewOrSwallow() {
